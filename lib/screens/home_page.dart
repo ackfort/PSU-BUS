@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapScreen extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _HomePageState extends State<HomePage> {
   GoogleMapController? mapController;
 
   final LatLng _center = const LatLng(
