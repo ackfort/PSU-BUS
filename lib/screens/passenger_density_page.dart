@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:psu_bus/components/custom_appbar.dart';
 
 class PassengerDensityPage extends StatelessWidget {
   const PassengerDensityPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text('PassengerDensityPage');
+    return Scaffold(
+      backgroundColor: Colors.grey[100], // ตั้งค่าพื้นหลังของ Scaffold
+      appBar: CustomAppBar(),
+      body: const Center(
+        child: Text('PassengerDensityPage'),
+      ),
+    );
   }
 }
