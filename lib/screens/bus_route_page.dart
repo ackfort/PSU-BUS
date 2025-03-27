@@ -7,10 +7,18 @@ class BusRoutePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100], // ตั้งค่าพื้นหลังของ Scaffold
+      backgroundColor: Colors.grey[100],
       appBar: CustomAppBar(),
-      body: const Center(
-        child: Text('BusRoutePage'),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Image.asset(
+              'assets/images/PSU-Bus-Routes.jpg', // ระบุ path ของรูปภาพ
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
       ),
     );
   }
