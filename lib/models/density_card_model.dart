@@ -7,6 +7,8 @@ class DensityInfo {
   final int waitingCount; // จำนวนผู้ใช้บริการที่รออยู่
   final String line; // สายของป้ายหรือรถบัส
   final int lineColorType; // 1: blue, 2: red, 3: green
+  final double latitude; // ละติจูดของตำแหน่ง
+  final double longitude; // ลองจิจูดของตำแหน่ง
 
   const DensityInfo({
     required this.name,
@@ -15,6 +17,8 @@ class DensityInfo {
     required this.waitingCount,
     required this.line,
     required this.lineColorType,
+    required this.latitude,
+    required this.longitude,
   });
 
   // Helper methods

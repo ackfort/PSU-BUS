@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psu_bus/components/navbar.dart';
-import 'package:psu_bus/screens/user_profile_page.dart'; // นำเข้า UserProfilePage
+import 'package:psu_bus/screens/user_profile_page.dart';
+import '../models/density_card_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'PSU-BUS',
       home: const NavBar(),
       routes: {
-        '/profile': (context) => const UserProfilePage(), // เพิ่ม Route สำหรับ User Profile
+        '/profile': (context) => const UserProfilePage(),
+        '/home-with-marker': (context) {
+          final info = ModalRoute.of(context)!.settings.arguments as DensityInfo?;
+          return NavBar.withMarker(selectedMarker: info);
+        },
       },
     );
   }

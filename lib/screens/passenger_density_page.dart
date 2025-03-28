@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psu_bus/components/custom_appbar.dart';
 import 'package:psu_bus/components/line_filter.dart';
+import 'package:psu_bus/mock_data/database.dart';
 import '../models/density_card_model.dart';
 import '../components/density_card.dart';
 
@@ -10,41 +11,7 @@ class PassengerDensityPage extends StatefulWidget {
 }
 
 class _PassengerDensityPageState extends State<PassengerDensityPage> {
-  final List<DensityInfo> allBusStops = [
-    DensityInfo(
-      name: "รถบัสหมายเลข 15A",
-      type: TransportType.bus,
-      density: "High Density",
-      waitingCount: 35,
-      line: "1",
-      lineColorType: 1, // blue
-    ),
-    DensityInfo(
-      name: "ป้ายสยามสแควร์",
-      type: TransportType.stop,
-      density: "Medium Density",
-      waitingCount: 22,
-      line: "2",
-      lineColorType: 2, // red
-    ),
-    DensityInfo(
-      name: "รถบัสหมายเลข 8",
-      type: TransportType.bus,
-      density: "Low Density",
-      waitingCount: 8,
-      line: "1",
-      lineColorType: 1, // blue
-    ),
-    DensityInfo(
-      name: "ป้ายมหาวิทยาลัย",
-      type: TransportType.stop,
-      density: "High Density",
-      waitingCount: 42,
-      line: "3",
-      lineColorType: 3, // green
-    ),
-  ];
-
+  final List<DensityInfo> allBusStops = mockMarkers;
   String? selectedLine;
   List<String> availableLines = [];
 
@@ -62,6 +29,10 @@ class _PassengerDensityPageState extends State<PassengerDensityPage> {
     return allBusStops.where((stop) => stop.line == selectedLine).toList();
   }
 
+  void _navigateToHome(DensityInfo info) {
+    Navigator.pushNamed(context, '/home-with-marker', arguments: info);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,8 +40,7 @@ class _PassengerDensityPageState extends State<PassengerDensityPage> {
       appBar: CustomAppBar(),
       body: Column(
         children: [
-          // Using the new filter component
-          SizedBox(height: 6,),
+          SizedBox(height: 6),
           LineFilter(
             availableLines: availableLines,
             selectedLine: selectedLine,
@@ -80,18 +50,23 @@ class _PassengerDensityPageState extends State<PassengerDensityPage> {
               });
             },
           ),
-          // List of cards
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(bottom: 6),
               itemCount: filteredBusStops.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+                return GestureDetector(
+                  onTap:
+                      () => _navigateToHome(
+                        filteredBusStops[index],
+                      ), // กดแล้วไป HomePage
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    child: DensityCard(info: filteredBusStops[index]),
                   ),
-                  child: DensityCard(info: filteredBusStops[index]),
                 );
               },
             ),
