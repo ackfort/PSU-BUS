@@ -1,68 +1,130 @@
 import 'package:flutter/material.dart';
+import '../models/density_card_model.dart';
 
 class DensityCard extends StatelessWidget {
-  final String busStopName;
-  final String density;
-  final int passengerCount;
+  final DensityInfo info;
 
   const DensityCard({
     Key? key,
-    required this.busStopName,
-    required this.density,
-    required this.passengerCount,
+    required this.info,
   }) : super(key: key);
-
-  Color _getDensityColor() {
-    switch (density.toLowerCase()) {
-      case 'high density':
-        return Colors.red.shade400;
-      case 'medium density':
-        return Colors.orange.shade400;
-      case 'low density':
-        return Colors.green.shade400;
-      default:
-        return Colors.grey;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Bus stop name (large and bold)
-            Text(
-              busStopName,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-
-            // Density indicator (colored)
+            // Name and type
             Row(
               children: [
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    color: _getDensityColor(),
-                    shape: BoxShape.circle,
+                Text(
+                  info.name,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 8),
-                Text(density, style: const TextStyle(fontSize: 16)),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
 
-            // Passenger count
-            Text(
-              '$passengerCount passengers',
-              style: const TextStyle(fontSize: 16, color: Colors.grey),
+            // Line information
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: DensityInfo.getLineColor(info.lineColorType).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(
+                  color: DensityInfo.getLineColor(info.lineColorType),
+                  width: 1.5,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    info.type == TransportType.bus 
+                        ? Icons.directions_bus 
+                        : Icons.pin_drop,
+                    size: 18,
+                    color: DensityInfo.getLineColor(info.lineColorType),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'สาย ${info.line}',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: DensityInfo.getLineColor(info.lineColorType),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            // Density and waiting information
+            Row(
+              children: [
+                // Density indicator
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: DensityInfo.getDensityColor(info.density).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          color: DensityInfo.getDensityColor(info.density),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        info.density,
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                // Waiting count
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.indigo.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.people,
+                        size: 16,
+                        color: Colors.indigo,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        '${info.waitingCount} รออยู่',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.indigo,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -70,9 +70,9 @@ class _NavBarState extends State<NavBar> {
       ),
       body:
           <Widget>[
-            const BusRoutePage(),
-            const HomePage(),
-            const PassengerDensityPage(),
+            BusRoutePage(),
+            HomePage(),
+            PassengerDensityPage(),
           ][currentPageIndex],
     );
   }
