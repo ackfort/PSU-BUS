@@ -30,8 +30,21 @@ class _PassengerDensityPageState extends State<PassengerDensityPage> {
   }
 
   void _navigateToHome(DensityInfo info) {
-    Navigator.pushNamed(context, '/home-with-marker', arguments: info);
-  }
+  // กรองเฉพาะรถบัสที่อยู่ในสายเดียวกัน (ไม่รวมป้ายรถเมล์)
+  final busesInSameLine = allBusStops.where((stop) => 
+    stop.line == info.line && 
+    stop.type == TransportType.bus
+  ).toList();
+
+  Navigator.pushNamed(
+    context, 
+    '/home-with-marker', 
+    arguments: {
+      'selectedMarker': info,
+      'busesInSameLine': busesInSameLine,
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
