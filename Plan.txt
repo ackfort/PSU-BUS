@@ -1,0 +1,28 @@
+DATABASE
+
+Bus-Stop
+- name
+- line
+- latitude
+- longitude
+- density
+- passenger
+- wait-time
+
+Bus
+- name
+- line
+- latitude
+- longitude
+- density
+- passenger
+
+FLOW-APP
+- เลือกสถานที่ปลายทาง
+- แอปจะทำการเลือกป้ายที่ใกล้ที่สุดให้ / บอกให้ user ไปหาป้ายที่ใกล้ที่สุด
+- แสดงข้อมูลที่ป้ายนั้น + แสดงข้อมูลของรถในสาย
+
+HARDWARE
+- กล้อง + Sensor เก็บข้อมูลบนรถบัส
+- กล้องเก็บข้อมูลที่ป้าย
+- หลังจากได้ข้อมูลให้บันทึกลง Firebase แล้วแสดงบน Application
