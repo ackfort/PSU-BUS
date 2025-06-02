@@ -9,7 +9,7 @@ class PSUAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.psuBlue,
+      backgroundColor: AppColors.deepBlue,
       elevation: 20.0, // 🌟 เพิ่มเงา
       shadowColor: Colors.black.withOpacity(0.4), // ปรับสีเงาให้ดูนุ่ม
       title: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psu_bus/theme/app_colors.dart';
 
 class CustomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -12,21 +13,49 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      onDestinationSelected: onDestinationSelected,
-      selectedIndex: currentIndex,
-      indicatorColor: Colors.amber,
-      destinations: const <Widget>[
-        NavigationDestination(
-          selectedIcon: Icon(Icons.home),
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, -2), // เงาอยู่ด้านบนของ navbar
+          ),
+        ],
+      ),
+      child: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          indicatorColor: AppColors.deepBlue,
+          backgroundColor: AppColors.white,
+          labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>((
+            Set<MaterialState> states,
+          ) {
+            if (states.contains(MaterialState.selected)) {
+              return const TextStyle(
+                color: AppColors.deepBlue,
+                fontWeight: FontWeight.bold,
+              );
+            }
+            return const TextStyle(color: Colors.grey);
+          }),
         ),
-        NavigationDestination(
-          icon: Badge(child: Icon(Icons.notifications_sharp)),
-          label: 'Notifications',
+        child: NavigationBar(
+          onDestinationSelected: onDestinationSelected,
+          selectedIndex: currentIndex,
+          destinations: [
+            NavigationDestination(
+              selectedIcon: Icon(Icons.home, color: Colors.white),
+              icon: Icon(Icons.home_outlined, color: Colors.grey),
+              label: 'หน้าหลัก',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.bus_alert, color: Colors.white),
+              icon: Icon(Icons.bus_alert_outlined, color: Colors.grey),
+              label: 'เส้นทางการเดินรถ',
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
