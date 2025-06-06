@@ -49,8 +49,14 @@ class CustomNavBar extends StatelessWidget {
               label: 'หน้าหลัก',
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.bus_alert, color: Colors.white),
-              icon: Icon(Icons.bus_alert_outlined, color: Colors.grey),
+              selectedIcon: Icon(
+                Icons.directions_bus_filled_rounded,
+                color: Colors.white,
+              ),
+              icon: Icon(
+                Icons.directions_bus_filled_outlined,
+                color: Colors.grey,
+              ),
               label: 'เส้นทางการเดินรถ',
             ),
           ],

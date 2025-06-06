@@ -2,20 +2,20 @@ DATABASE
 
 Bus-Stop
 - name
-- line
-- latitude
-- longitude
-- density
-- passenger
-- wait-time
+- line(มี 3 สาย)
+- latitude(เป็นค่าคงที่ไม่เปลี่ยนแปลง)
+- longitude(เป็นค่าคงที่ไม่เปลี่ยนแปลง)
+- density(มี 3 ระดับแต่ละระดับจะมีสีของตัวเองซึ่งแบ่งเป็น 3 สี คือ เขียว เหลือง แดง)
+- passenger(จำนวนผู้โดยสารบนรถ)
+- wait-time(ระยะเวลาที่รถจะมาถึง)
 
 Bus
 - name
-- line
-- latitude
-- longitude
-- density
-- passenger
+- line(มี 3 สาย)
+- latitude(มีการ Update แบบ real-time)
+- longitude(มีการ Update แบบ real-time)
+- density(มี 3 ระดับแต่ละระดับจะมีสีของตัวเองซึ่งแบ่งเป็น 3 สี คือ เขียว เหลือง แดง)
+- passenger(จำนวนผู้โดยสารบนรถ)
 
 FLOW-APP
 - เลือกสถานที่ปลายทาง
