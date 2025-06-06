@@ -1,63 +1,59 @@
 import 'package:flutter/material.dart';
 
-enum BusLine { line1, line2, line3 }
+enum BusLineStop { line1, line2, line3 }
 
-enum DensityLevel { low, medium, high }
+enum DensityLevelStop { low, medium, high }
 
-class Bus {
-  String name;
-  BusLine line;
-  double latitude;
-  double longitude;
-  DensityLevel density;
-  int passenger;
+class BusStop {
+  final String name;
+  final BusLineStop line;
+  final double latitude;
+  final double longitude;
+  final DensityLevelStop density;
+  final int passenger;
+  final Duration waitTime;
 
-  Bus({
+  BusStop({
     required this.name,
     required this.line,
     required this.latitude,
     required this.longitude,
     required this.density,
     required this.passenger,
+    required this.waitTime,
   });
 
-  // ฟังก์ชันสำหรับอัปเดตตำแหน่งแบบ real-time
-  void updateLocation(double newLat, double newLng) {
-    latitude = newLat;
-    longitude = newLng;
-  }
-
-  // สีตามระดับความหนาแน่น
+  // ฟังก์ชันสำหรับแสดงสีตามระดับความหนาแน่น
   Color get densityColor {
     switch (density) {
-      case DensityLevel.low:
+      case DensityLevelStop.low:
         return Colors.green;
-      case DensityLevel.medium:
+      case DensityLevelStop.medium:
         return Colors.yellow;
-      case DensityLevel.high:
+      case DensityLevelStop.high:
         return Colors.red;
     }
   }
 
-  // แปลง Enum เป็นข้อความ
+  // แปลง Enum เป็น String (เช่นสำหรับแสดงผล)
   String get lineLabel {
     switch (line) {
-      case BusLine.line1:
+      case BusLineStop.line1:
         return 'สาย 1';
-      case BusLine.line2:
+      case BusLineStop.line2:
         return 'สาย 2';
-      case BusLine.line3:
+      case BusLineStop.line3:
         return 'สาย 3';
     }
   }
 
   String get densityLabel {
     switch (density) {
-      case DensityLevel.low:
+      case DensityLevelStop.low:
         return 'หนาแน่นน้อย';
-      case DensityLevel.medium:
+      case DensityLevelStop.medium:
         return 'ปานกลาง';
-      case DensityLevel.high:
+      case DensityLevelStop.high:
         return 'หนาแน่นมาก';
     }
   }

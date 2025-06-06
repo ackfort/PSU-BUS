@@ -1,59 +1,62 @@
-import 'package:flutter/material.dart';
 
-enum BusLine { line1, line2, line3 }
+enum BusLineBus { line1, line2, line3 }
 
-enum DensityLevel { low, medium, high }
+enum DensityLevelBus { low, medium, high }
 
-class BusStop {
-  final String name;
-  final BusLine line;
-  final double latitude;
-  final double longitude;
-  final DensityLevel density;
-  final int passenger;
-  final Duration waitTime;
+class Bus {
+  String name;
+  BusLineBus line;
+  double latitude;
+  double longitude;
+  DensityLevelBus density;
+  int passenger;
 
-  BusStop({
+  Bus({
     required this.name,
     required this.line,
     required this.latitude,
     required this.longitude,
     required this.density,
     required this.passenger,
-    required this.waitTime,
   });
 
-  // ฟังก์ชันสำหรับแสดงสีตามระดับความหนาแน่น
+  // ฟังก์ชันสำหรับอัปเดตตำแหน่งแบบ real-time
+  void updateLocation(double newLat, double newLng) {
+    latitude = newLat;
+    longitude = newLng;
+  }
+
+  // สีตามระดับความหนาแน่น
   Color get densityColor {
     switch (density) {
-      case DensityLevel.low:
+      case DensityLevelBus.low:
         return Colors.green;
-      case DensityLevel.medium:
+      case DensityLevelBus.medium:
         return Colors.yellow;
-      case DensityLevel.high:
+      case DensityLevelBus.high:
         return Colors.red;
     }
   }
 
-  // แปลง Enum เป็น String (เช่นสำหรับแสดงผล)
+  // แปลง Enum เป็นข้อความ
   String get lineLabel {
     switch (line) {
-      case BusLine.line1:
+      case BusLineBus.line1:
         return 'สาย 1';
-      case BusLine.line2:
+      case BusLineBus.line2:
         return 'สาย 2';
-      case BusLine.line3:
+      case BusLineBus.line3:
         return 'สาย 3';
     }
   }
 
   String get densityLabel {
     switch (density) {
-      case DensityLevel.low:
+      case DensityLevelBus.low:
         return 'หนาแน่นน้อย';
-      case DensityLevel.medium:
+      case DensityLevelBus.medium:
         return 'ปานกลาง';
-      case DensityLevel.high:
+      case DensityLevelBus.high:
         return 'หนาแน่นมาก';
     }
   }
