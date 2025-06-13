@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:psu_bus/components/custom_searchbar.dart';
+import 'package:psu_bus/components/go_to_stop_dialog.dart';
 import 'package:psu_bus/mockData/mock_data.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +14,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   GoogleMapController? mapController;
   LatLng _location = const LatLng(7.006249, 100.499634);
+
+  LatLng? selectedStopLocation;
+  String selectedStopName = '';
+
+  void showGoToStopDialog(BuildContext context) {
+    CustomPopup.show(
+      context,
+      'เลือกสถานที่ปลายทางสำเร็จแล้ว',
+      'กรุณาเดินทางไปที่ป้ายรถเมล์ที่ใกล้ที่สุด?',
+    );
+  }
+
+  void _onBusStopSelected() {
+    showGoToStopDialog(context);
+    // TODO: เพิ่ม logic เปลี่ยน CustomNavBar เป็น state2 ตามแผนแอพ
+  }
 
   final Set<Marker> _markers =
       busStopDatabase
@@ -63,10 +80,8 @@ class _HomePageState extends State<HomePage> {
           left: 15,
           right: 15,
           child: BusSearchBar(
-            onSelected: (LatLng position) {
-              mapController?.animateCamera(
-                CameraUpdate.newLatLngZoom(position, 17),
-              );
+            onSelected: (LatLng latLng) {
+              _onBusStopSelected();
             },
           ),
         ),
